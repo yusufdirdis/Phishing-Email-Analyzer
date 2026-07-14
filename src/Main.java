@@ -27,7 +27,7 @@ public class Main {
                 KeywordAnalyzer.detectKeywords(email)
         );
 
-        // URL Analysis
+        // URL Analysis (You)
         flags.addAll(
                 LinkAnalyzer.analyzeLinks(email)
         );
