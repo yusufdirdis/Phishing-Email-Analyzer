@@ -22,12 +22,12 @@ public class KeywordDetector {
         List<String> matches = new ArrayList<>();
 
         // Prevent NullPointerException
-        if (email == null || email.getBody() == null) {
+        if (email == null || email.body == null) {
             return matches;
         }
 
         // Convert the email body to lowercase
-        String body = email.getBody().toLowerCase();
+        String body = email.body.toLowerCase();
 
         // Check for suspicious keywords
         for (String keyword : KEYWORDS) {
