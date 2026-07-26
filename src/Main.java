@@ -1,52 +1,48 @@
-import analyzer.KeywordAnalyzer;
 import analyzer.LinkAnalyzer;
 import model.AnalysisResult;
 import model.EmailData;
-import parser.EmailParser;
+import model.KeywordDetector;
 import scoring.RiskScorer;
+import test.TestData;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class Main {
+class Main {
 
-    public static void main(String[] args) {
+     static void main() {
 
-        // Read email
-        EmailData email = EmailParser.parseEmail("email.txt");
+        System.out.println("===== PHISHING EMAIL ANALYZER =====");
+        System.out.println();
+
+        // Temporary input until EmailParser is completed
+        EmailData email = TestData.getTestEmail();
 
         if (email == null) {
-            System.out.println("Unable to read email.");
+            System.out.println("Unable to load email.");
             return;
         }
 
-        List<String> flags = new ArrayList<>();
+        ArrayList<String> flags = new ArrayList<>();
 
-        // Keyword Analysis (Nubaid)
-        flags.addAll(
-                KeywordAnalyzer.detectKeywords(email)
-        );
+        // Nubaid - Keyword Detection
+        flags.addAll(KeywordDetector.detectKeywords(email));
 
-        // URL Analysis (Villeret)
-        flags.addAll(
-                LinkAnalyzer.analyzeLinks(email)
-        );
+        // Villeret - URL Analysis
+        flags.addAll(LinkAnalyzer.analyzeLinks(email));
 
-        // Risk Score (Josue)
-        AnalysisResult result =
-                RiskScorer.score(flags);
+        // Josue - Risk Scoring
+        RiskScorer riskScorer = new RiskScorer();
+        AnalysisResult result = riskScorer.score(flags);
 
-        // Final Output
-        System.out.println("===== Phishing Email Analysis =====");
-        System.out.println();
-
+        // Display email information
         System.out.println("Sender: " + email.sender);
+        System.out.println("Subject: " + email.subject);
         System.out.println();
 
-        System.out.println("Flags Found:");
+        System.out.println("Detected Issues:");
 
         if (flags.isEmpty()) {
-            System.out.println("None");
+            System.out.println("- No suspicious indicators detected.");
         } else {
             for (String flag : flags) {
                 System.out.println("- " + flag);
@@ -54,9 +50,10 @@ public class Main {
         }
 
         System.out.println();
-
         System.out.println("Risk Score: " + result.score);
-
         System.out.println("Risk Level: " + result.riskLevel);
+
+        System.out.println();
+        System.out.println("===== ANALYSIS COMPLETE =====");
     }
 }
