@@ -1,0 +1,22 @@
+From: security@paypa1-support.com
+Subject: Urgent: Verify Your PayPal Account Immediately
+
+Dear Customer,
+
+We detected unusual activity on your PayPal account.
+
+To prevent your account from being suspended, please verify your identity immediately.
+
+You can access your account using the official PayPal website:
+https://www.paypal.com
+
+If you do not verify within 24 hours, your account will be permanently suspended.
+
+For your convenience, you may also use the secure verification link below:
+http://paypa1-secure.com/login
+
+You may also review our Help Center:
+https://www.paypal.com/us/cshelp
+
+Thank you,
+PayPal Security Team
